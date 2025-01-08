@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Compression Tool</title>
+    <link rel="stylesheet" href="./style/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="drop-area" id="dropArea">
+            <p>Drop images here or click to upload</p>
+            <input type="file" id="fileInput" accept="image/*" hidden>
+        </div>
+
+        <div class="settings">
+            <div class="compression-settings">
+                <h3>Compression Quality</h3>
+                <div class="buttons">
+                    <button data-quality="0.1">10%</button>
+                    <button data-quality="0.3">30%</button>
+                    <button data-quality="0.5">50%</button>
+                    <button data-quality="0.7">70%</button>
+                    <button data-quality="0.9">90%</button>
+                    <button data-quality="1.0">Lossless</button>
+                </div>
+            </div>
+
+            <div class="scale-settings">
+                <h3>Scale Ratio</h3>
+                <div class="buttons">
+                    <button data-scale="1">100%</button>
+                    <button data-scale="0.75">75%</button>
+                    <button data-scale="0.5">50%</button>
+                    <button data-scale="0.25">25%</button>
+                </div>
+            </div>
+
+            <div class="compress-button-container">
+                <button id="startCompress" class="compress-button">Start Compression</button>
+                <button id="deleteAll" class="compress-button delete-all" style="display: none;">
+                    <i class="fas fa-trash-alt"></i> Delete All
+                </button>
+                <button id="downloadAll" class="compress-button download-all" style="display: none;">
+                    <i class="fas fa-file-archive"></i> Download All
+                </button>
+            </div>
+        </div>
+
+        <div class="category-list">
+            <div class="category uncategorized" data-name="uncategorized">
+                <div class="category-header">
+                    <i class="fas fa-chevron-down"></i>
+                    <span>Uncategorized</span>
+                    <span class="image-count">(0)</span>
+                </div>
+                <div class="category-content">
+                    <!-- 圖片卡片會在這裡 -->
+                </div>
+            </div>
+            <!-- 其他分類會動態添加在裡 -->
+        </div>
+    </div>
+    <div class="modal" id="imageModal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <img id="modalImage" src="" alt="Preview Image">
+        </div>
+    </div>
+    <div class="floating-buttons">
+        <button id="themeToggle" class="floating-button theme-toggle">
+            <i class="fas fa-moon"></i>
+        </button>
+        <button id="langToggle" class="floating-button lang-toggle">
+            <span>TW</span>
+        </button>
+    </div>
+    <div class="compression-overlay" style="display: none;">
+        <div class="compression-progress">
+            <h3>壓縮進度</h3>
+            <div class="progress-bar-container">
+                <div class="progress-bar"></div>
+            </div>
+            <p class="current-file"></p>
+            <p class="progress-text">0%</p>
+        </div>
+    </div>
+    <script src="./script/script.js"></script>
+</body>
+</html> 

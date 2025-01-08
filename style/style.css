@@ -1,0 +1,860 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* 美化滾動條 */
+::-webkit-scrollbar {
+    width: 8px;
+  }
+  
+::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+  }
+  
+::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 4px;
+  }
+  
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.3);
+  }
+
+.container {
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 0 20px;
+}
+
+.drop-area {
+    border: 2px dashed #ccc;
+    border-radius: 8px;
+    padding: 40px;
+    text-align: center;
+    background-color: #f8f8f8;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.drop-area.dragover {
+    background-color: #e1e1e1;
+    border-color: #999;
+}
+
+.settings {
+    margin: 20px 0;
+    padding: 20px;
+    background-color: #f0f0f0;
+    border-radius: 8px;
+}
+
+.compression-settings,
+.scale-settings {
+    margin-bottom: 15px;
+}
+
+.buttons {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-top: 10px;
+}
+
+button {
+    padding: 8px 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #f0f0f0;
+    color: #666;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+button:hover {
+    background-color: #e0e0e0;
+}
+
+button.active {
+    background-color: #007bff;
+    color: white;
+    border-color: #0056b3;
+}
+
+.image-list {
+    display: none;
+}
+
+.image-card {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 10px;
+    background-color: white;
+    position: relative;
+    margin: 0;
+}
+
+.image-card img {
+    width: 100%;
+    height: 150px;
+    object-fit: contain;
+    margin-bottom: 10px;
+    cursor: zoom-in;
+    transition: opacity 0.3s;
+}
+
+.image-card img:hover {
+    opacity: 0.8;
+}
+
+.image-info {
+    font-size: 14px;
+    color: #666;
+    min-height: 85px;
+}
+
+.image-info p {
+    margin-bottom: 8px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
+}
+
+.image-info .filename {
+    max-height: 2.4em;
+    line-height: 1.2em;
+    white-space: normal;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    word-break: break-word;
+    padding-right: 5px;
+    margin-bottom: 10px;
+}
+
+.compressed-size {
+    color: #999;
+    white-space: normal !important;
+    line-height: 1.4em;
+    min-height: 2.8em;
+    padding: 4px 0;
+}
+
+.compressed-size small {
+    display: block;
+    margin-top: 4px;
+    color: #666;
+}
+
+.compressed-size.actual {
+    color: #28a745;
+    font-weight: 500;
+}
+
+.compress-button-container {
+    text-align: center;
+    margin-top: 20px;
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}
+
+.compress-button {
+    background-color: #28a745;
+    color: white;
+    padding: 12px 24px;
+    font-size: 16px;
+    border: none;
+    align-items: center;
+}
+
+.compress-button:hover {
+    background-color: #218838;
+}
+
+.status-icon {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 14px;
+    z-index: 99;
+}
+
+.status-icon.pending {
+    background-color: #ffc107;
+}
+
+.status-icon.completed {
+    background-color: #28a745;
+}
+
+/* Font Awesome 圖標樣式 */
+.status-icon i {
+    font-size: 12px;
+}
+
+.card-actions {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    display: flex;
+    gap: 8px;
+    z-index: 99;
+}
+
+.action-button {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    cursor: pointer;
+    border: none;
+    transition: all 0.2s;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    padding: 0;
+}
+
+.action-button:hover {
+    transform: scale(1.1);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}
+
+.action-button.download {
+    background-color: #17a2b8;
+}
+
+.action-button.download:hover {
+    background-color: #138496;
+}
+
+.action-button.delete {
+    background-color: #dc3545;
+}
+
+.action-button.delete:hover {
+    background-color: #c82333;
+}
+
+.action-button i {
+    font-size: 14px;
+}
+
+.download-all {
+    background-color: #17a2b8 !important;
+}
+
+.download-all:hover {
+    background-color: #138496 !important;
+}
+
+.download-all i {
+    margin-right: 8px;
+}
+
+/* 模態框樣式 */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.9);
+    z-index: 1000;
+    cursor: zoom-out;
+}
+
+.modal-content {
+    position: relative;
+    margin: auto;
+    padding: 20px;
+    width: 90%;
+    height: 90%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: default;
+}
+
+.modal-content img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    pointer-events: none;
+}
+
+.close-modal {
+    position: absolute;
+    top: 15px;
+    right: 25px;
+    color: #f1f1f1;
+    font-size: 40px;
+    font-weight: bold;
+    cursor: pointer;
+    z-index: 1001;
+}
+
+.close-modal:hover {
+    color: #bbb;
+}
+
+.delete-all {
+    background-color: #dc3545 !important;
+}
+
+.delete-all:hover {
+    background-color: #c82333 !important;
+}
+
+.delete-all i {
+    margin-right: 8px !important;
+}
+
+/* Floating Buttons */
+.floating-buttons {
+    position: fixed;
+    left: 20px;
+    bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    z-index: 1000;
+}
+
+.floating-button {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background-color: #fff;
+    border: none;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    color: #333;
+    transition: all 0.3s ease;
+}
+.floating-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.theme-toggle {
+    background-color: #6c757d;
+    color: #fff;
+}
+
+.theme-toggle:hover {
+    background-color: #5a6268;
+}
+
+.lang-toggle {
+    background-color: #17a2b8;
+    color: #fff;
+    font-weight: 500;
+}
+
+.lang-toggle:hover {
+    background-color: #138496;
+}
+
+/* Dark Theme Styles */
+body.dark-theme {
+    background-color: #1a1a1a;
+    color: #fff;
+}
+
+body.dark-theme .drop-area {
+    background-color: #333;
+    border-color: #444;
+}
+
+body.dark-theme .settings {
+    background-color: #333;
+}
+
+body.dark-theme .image-card {
+    background-color: #2d2d2d;
+    border-color: #444;
+}
+
+body.dark-theme .image-info {
+    color: #ddd;
+}
+
+body.dark-theme button {
+    background-color: #444;
+    border-color: #555;
+    color: #fff;
+}
+
+body.dark-theme button:hover {
+    background-color: #555;
+}
+
+body.dark-theme button.active {
+    background-color: #0056b3;
+} 
+
+body.dark-theme .compress-button {
+    background-color: #28a745;
+}
+
+body.dark-theme .compress-button:hover {
+    background-color: #218838;
+}
+
+body.dark-theme .drop-area {
+    background-color: #2d2d2d;
+    border-color: #555;
+}
+
+body.dark-theme .drop-area:hover {
+    background-color: #383838;
+    border-color: #666;
+}
+
+body.dark-theme .drop-area.dragover {
+    background-color: #383838;
+    border-color: #777;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+}
+
+/* 分類列表樣式 */
+.category-list {
+    margin: 20px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.category {
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    overflow: hidden;
+    background-color: var(--card-bg);
+}
+
+.category-header {
+    padding: 12px 15px;
+    background-color: var(--category-header-bg);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: background-color 0.3s ease;
+}
+
+.category-header i {
+    margin-right: 10px;
+    transition: transform 0.3s ease;
+}
+
+.category-header.collapsed i {
+    transform: rotate(-90deg);
+}
+
+.category-header span {
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.category-header .image-count {
+    margin-left: 8px;
+    color: var(--button-color);
+    font-weight: normal;
+}
+
+.category-content {
+    padding: 15px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+    background-color: var(--bg-color);
+    transition: all 0.3s ease;
+    max-height: 2000px;
+    opacity: 1;
+    overflow: hidden;
+}
+
+.category-content.collapsed {
+    max-height: 0;
+    padding: 0 15px;
+    opacity: 0;
+}
+
+/* 深色模式下的分類樣式 */
+body.dark-theme .category {
+    background-color: var(--dark-card-bg);
+    border-color: var(--dark-border);
+}
+
+body.dark-theme .category-header {
+    background-color: var(--dark-category-header-bg);
+}
+
+body.dark-theme .category-header .image-count {
+    color: var(--dark-text-secondary);
+}
+
+body.dark-theme .category-content {
+    background-color: var(--dark-bg);
+}
+
+/* 確保圖片卡片樣式正確 */
+.category-content .image-card {
+    margin: 0;
+    border: 1px solid var(--border-color);
+}
+
+/* 修改 CSS 變量 */
+:root {
+    --bg-color: #ffffff;
+    --card-bg: #ffffff;
+    --border-color: #dddddd;
+    --category-header-bg: #f8f8f8;
+    --hover-bg: #f0f0f0;
+    --dark-bg: #1a1a1a;
+    --dark-card-bg: #2d2d2d;
+    --dark-border: #444;
+    --dark-category-header-bg: #333;
+    --dark-hover-bg: #404040;
+    --delete-btn-color: #dc3545;
+    --delete-btn-hover-color: #c82333;
+}
+
+/* 添加分類展開/收起的過渡動畫 */
+.category-header i,
+.category-content {
+    transition: all 0.3s ease;
+}
+
+/* 懸停效果 */
+.category-header:hover {
+    background-color: var(--hover-bg);
+}
+
+body.dark-theme .category-header:hover {
+    background-color: var(--dark-hover-bg);
+}
+
+/* 添加禁用狀態的樣式 */
+.settings.disabled {
+    opacity: 0.7;
+    pointer-events: none;
+}
+
+button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    background-color: #ccc !important;
+    border-color: #999 !important;
+    color: #666 !important;
+}
+
+/* 深色模式下的禁用狀態 */
+body.dark-theme .settings.disabled {
+    opacity: 0.5;
+}
+
+body.dark-theme button:disabled {
+    background-color: #444 !important;
+    border-color: #555 !important;
+    color: #999 !important;
+}
+
+/* 修改壓縮按鈕的禁用狀態 */
+.compress-button:disabled {
+    background-color: #6c757d !important;
+    color: #ddd !important;
+    cursor: not-allowed;
+}
+
+body.dark-theme .compress-button:disabled {
+    background-color: #495057 !important;
+    color: #aaa !important;
+}
+
+/* 修改分類標題樣式 */
+.category-header {
+    padding: 12px 15px;
+    background-color: var(--category-header-bg);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: background-color 0.3s ease;
+}
+
+.category-title {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    user-select: none;
+    flex: 1;
+}
+
+.category-delete-btn {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background-color: transparent;
+    border: none;
+    color: var(--delete-btn-color);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    opacity: 0.7;
+}
+
+.category-delete-btn:hover {
+    opacity: 1;
+    color: var(--delete-btn-hover-color);
+    background-color: rgba(220, 53, 69, 0.1);
+}
+
+/* 深色模式下的刪除按鈕 */
+body.dark-theme .category-delete-btn {
+    color: #ff6b6b;
+}
+
+body.dark-theme .category-delete-btn:hover {
+    color: #ff4444;
+    background-color: rgba(255, 107, 107, 0.1);
+}
+
+.fa-trash-alt{
+    margin-right: 0px !important;
+}
+
+/* 添加設置按鈕樣式*/
+.action-button.settings {
+    background-color: #6c757d;
+    transition: all 0.3s ease;
+}
+
+.action-button.settings.active {
+    background-color: #17a2b8;
+}
+
+.action-button.settings:hover {
+    background-color: #5a6268;
+}
+
+.action-button.settings.active:hover {
+    background-color: #138496;
+}
+
+/* 設置彈出框樣式 */
+.settings-popup {
+    position: absolute;
+    top: 130%;
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 6px 15px 6px 15px;
+    width: 200px;
+    z-index: 1000;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    display: none;
+    right: -6px;
+    height: 300px;
+}
+
+.settings-popup.show {
+    display: block;
+}
+
+.settings-popup h4 {
+    margin-bottom: 10px;
+    font-size: 14px;
+    color: var(--text-color);
+}
+
+.settings-popup .buttons {
+    margin-bottom: 15px;
+}
+
+.settings-popup button {
+    padding: 4px 8px;
+    font-size: 12px;
+}
+
+/* 深色模式支持 */
+body.dark-theme .settings-popup {
+    background: var(--dark-card-bg);
+    border-color: var(--dark-border);
+}
+
+/* 自定義設置樣式 */
+.custom-settings {
+    padding: 10px 0;
+}
+
+.custom-settings label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 15px;
+    cursor: pointer;
+    user-select: none;
+}
+
+/* 自定義 checkbox 樣式 */
+.use-custom-settings {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 18px;
+    height: 18px;
+    border: 2px solid #6c757d;
+    border-radius: 4px;
+    cursor: pointer;
+    position: relative;
+    transition: all 0.2s ease;
+}
+
+.use-custom-settings:checked {
+    background-color: #17a2b8;
+    border-color: #17a2b8;
+}
+
+.use-custom-settings:checked::before {
+    content: '✓';
+    position: absolute;
+    color: white;
+    font-size: 14px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+/* 深色模式下的 checkbox */
+body.dark-theme .use-custom-settings {
+    border-color: #adb5bd;
+}
+
+body.dark-theme .use-custom-settings:checked {
+    background-color: #17a2b8;
+    border-color: #17a2b8;
+}
+
+/* 設置選項的預設值標記 */
+.settings-popup button[data-quality="1.0"],
+.settings-popup button[data-scale="1"] {
+    position: relative;
+}
+
+.settings-popup button[data-quality="1.0"]::after,
+.settings-popup button[data-scale="1"]::after {
+    content: 'Default';
+    position: absolute;
+    top: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 10px;
+    color: #6c757d;
+    white-space: nowrap;
+    background-color: var(--card-bg);
+    padding: 2px 4px;
+    border-radius: 3px;
+}
+
+/* 深色模式下的預設標記 */
+body.dark-theme .settings-popup button[data-quality="1.0"]::after,
+body.dark-theme .settings-popup button[data-scale="1"]::after {
+    color: #adb5bd;
+    background-color: var(--dark-card-bg);
+}
+
+/* 調整設置彈出框的內部間距 */
+.settings-popup .quality-settings,
+.settings-popup .scale-settings {
+    margin-top: 20px;
+}
+
+.settings-popup .buttons {
+    position: relative;
+    padding-top: 10px;
+}
+
+/* 壓縮進度 overlay */
+.compression-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+}
+
+.compression-progress {
+    background-color: var(--card-bg);
+    padding: 30px;
+    border-radius: 10px;
+    text-align: center;
+    min-width: 300px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.compression-progress h3 {
+    margin-bottom: 20px;
+    color: var(--text-color);
+}
+
+.progress-bar-container {
+    width: 100%;
+    height: 20px;
+    background-color: #e9ecef;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 15px;
+}
+
+.progress-bar {
+    width: 0;
+    height: 100%;
+    background-color: #28a745;
+    transition: width 0.3s ease;
+}
+
+.current-file {
+    margin-bottom: 10px;
+    color: var(--text-color);
+    font-size: 14px;
+    word-break: break-all;
+}
+
+.progress-text {
+    color: var(--text-color);
+    font-weight: bold;
+}
+
+/* 深色模式支持 */
+body.dark-theme .compression-progress {
+    background-color: var(--dark-card-bg);
+}
+
+body.dark-theme .progress-bar-container {
+    background-color: #343a40;
+}

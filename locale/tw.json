@@ -1,0 +1,58 @@
+{
+  "dropArea": {
+    "text": "拖拽圖片到這裡或點擊上傳"
+  },
+  "settings": {
+    "quality": {
+      "title": "壓縮質量",
+      "options": {
+        "10": "10%",
+        "30": "30%",
+        "50": "50%",
+        "70": "70%",
+        "90": "90%",
+        "100": "100%"
+      }
+    },
+    "scale": {
+      "title": "縮放比例",
+      "options": {
+        "100": "100%",
+        "75": "75%",
+        "50": "50%",
+        "25": "25%"
+      }
+    }
+  },
+  "buttons": {
+    "startCompress": "開始壓縮",
+    "deleteAll": "一鍵刪除",
+    "downloadAll": "一鍵下載"
+  },
+  "imageCard": {
+    "filename": "檔案名稱",
+    "size": "尺寸",
+    "originalSize": "原始大小",
+    "compressedSize": "壓縮大小",
+    "estimatedSize": "預計大小",
+    "compressionRatio": "壓縮比例",
+    "customSettings": "個性化設置",
+    "useCustomSettings": "使用個性化設置"
+  },
+  "alerts": {
+    "maxImages": "最多只能處理 {max} 張圖片，目前已有 {current} 張。",
+    "fileTooLarge": "檔案「{filename}」太大 ({size})。\n最大檔案大小為 {maxSize}。",
+    "storageQuotaExceeded": "儲存空間已滿，部分圖片資訊將不會被保存。重新整理頁面後需要重新上傳圖片。",
+    "refreshWarning": "重新整理頁面後需要重新上傳圖片。",
+    "deleteConfirm": "確定要刪除所有圖片嗎？",
+    "deleteCategoryConfirm": "確定要刪除「{category}」分類及其所有圖片嗎？"
+  },
+  "categoryList": {
+    "uncategorized": "未分類"
+  },
+  "compression": {
+    "title": "壓��進度",
+    "processing": "正在處理：{filename}",
+    "completed": "壓縮完成！"
+  }
+} 

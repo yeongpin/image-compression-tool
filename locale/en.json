@@ -1,0 +1,58 @@
+{
+  "dropArea": {
+    "text": "Drop images here or click to upload"
+  },
+  "settings": {
+    "quality": {
+      "title": "Compression Quality",
+      "options": {
+        "10": "10%",
+        "30": "30%",
+        "50": "50%",
+        "70": "70%",
+        "90": "90%",
+        "100": "100%"
+      }
+    },
+    "scale": {
+      "title": "Scale Ratio",
+      "options": {
+        "100": "100%",
+        "75": "75%",
+        "50": "50%",
+        "25": "25%"
+      }
+    }
+  },
+  "buttons": {
+    "startCompress": "Start Compression",
+    "deleteAll": "Delete All",
+    "downloadAll": "Download All"
+  },
+  "imageCard": {
+    "filename": "Filename",
+    "size": "Size",
+    "originalSize": "Original Size",
+    "compressedSize": "Compressed Size",
+    "estimatedSize": "Estimated Size",
+    "compressionRatio": "Compression ratio to original size",
+    "customSettings": "Custom Settings",
+    "useCustomSettings": "Use Custom Settings"
+  },
+  "alerts": {
+    "maxImages": "Can only process up to {max} images. Currently have {current}.",
+    "fileTooLarge": "File \"{filename}\" is too large ({size}).\nMaximum file size is {maxSize}.",
+    "storageQuotaExceeded": "Storage is full, some image information will not be saved. You'll need to re-upload images after refreshing the page.",
+    "refreshWarning": "You'll need to re-upload images after refreshing.",
+    "deleteConfirm": "Are you sure you want to delete all images?",
+    "deleteCategoryConfirm": "Are you sure you want to delete the category \"{category}\" and all its images?"
+  },
+  "categoryList": {
+    "uncategorized": "Uncategorized"
+  },
+  "compression": {
+    "title": "Compression Progress",
+    "processing": "Processing: {filename}",
+    "completed": "Compression Completed!"
+  }
+} 
