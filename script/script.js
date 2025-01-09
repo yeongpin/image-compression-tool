@@ -153,8 +153,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const deleteAllBtn = document.getElementById('deleteAll');
     const themeToggle = document.getElementById('themeToggle');
     const langToggle = document.getElementById('langToggle');
-    let isDarkTheme = localStorage.getItem('darkTheme') === 'true';
-    let currentLang = localStorage.getItem('language') || 'TW';
+    let isDarkTheme = localStorage.getItem('darkTheme') === 'true' || true;
+    let currentLang = localStorage.getItem('language') || 'EN';
 
     // 初始化主題
     updateTheme();
@@ -1212,4 +1212,9 @@ document.addEventListener('DOMContentLoaded', () => {
             `;
         }
     }
+
+    // 添加返回首頁功能
+    document.getElementById('backtoHome').addEventListener('click', function() {
+        window.location.href = '../index.html';
+    });
 }); 
