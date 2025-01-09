@@ -1214,7 +1214,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // 添加返回首頁功能
-    document.getElementById('backtoHome').addEventListener('click', function() {
-        window.location.href = '../index.html';
-    });
+    // document.getElementById('backtoHome').addEventListener('click', function() {
+    //     window.location.href = '../index.html';
+    // });
 }); 
